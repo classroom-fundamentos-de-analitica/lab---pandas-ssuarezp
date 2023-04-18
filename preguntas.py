@@ -22,7 +22,8 @@ def pregunta_01():
     40
 
     """
-    return len(tbl0.index)
+    f = len(tbl0.index)
+    return f
 
 
 def pregunta_02():
@@ -33,7 +34,8 @@ def pregunta_02():
     4
 
     """
-    return len(tbl0.columns)
+    c = len(tbl0.columns)
+    return c
 
 
 def pregunta_03():
@@ -50,7 +52,8 @@ def pregunta_03():
     Name: _c1, dtype: int64
 
     """
-    return tbl0["_c1"].groupby(tbl0["_c1"]).size()
+    r = tbl0["_c1"].groupby(tbl0["_c1"]).size()
+    return r
 
 
 def pregunta_04():
@@ -65,7 +68,8 @@ def pregunta_04():
     E    4.785714
     Name: _c2, dtype: float64
     """
-    return tbl0[["_c1","_c2"]].groupby(by=["_c1"]).mean().squeeze()
+    prom = tbl0[["_c1","_c2"]].groupby(by=["_c1"]).mean().squeeze()
+    return prom
 
 
 def pregunta_05():
@@ -82,7 +86,8 @@ def pregunta_05():
     E    9
     Name: _c2, dtype: int64
     """
-    return tbl0[["_c1","_c2"]].groupby(by=["_c1"]).max().squeeze()
+    max = tbl0[["_c1","_c2"]].groupby(by=["_c1"]).max().squeeze()
+    return max
 
 
 def pregunta_06():
@@ -116,7 +121,8 @@ def pregunta_07():
     E    67
     Name: _c2, dtype: int64
     """
-    return tbl0[["_c1","_c2"]].groupby(by=["_c1"]).sum().squeeze()
+    sum = tbl0[["_c1","_c2"]].groupby(by=["_c1"]).sum().squeeze()
+    return sum
 
 
 def pregunta_08():
@@ -181,7 +187,8 @@ def pregunta_10():
         string = string[:-1]
         temp = pd.DataFrame({"_c1":[letra], "_c2": string})
         data1 = data1.append(temp, ignore_index=True)
-    return data1.sort_values("_c1").set_index("_c1")
+    final = data1.sort_values("_c1").set_index("_c1")
+    return final
 
 
 def pregunta_11():
@@ -268,4 +275,5 @@ def pregunta_13():
     E    275
     Name: _c5b, dtype: int64
     """
-    return tbl0.merge(tbl2, right_on = '_c0', left_on = '_c0').groupby('_c1').sum()['_c5b']
+    merge = tbl0.merge(tbl2, right_on = '_c0', left_on = '_c0').groupby('_c1').sum()['_c5b']
+    return merge
