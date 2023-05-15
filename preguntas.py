@@ -6,7 +6,7 @@ Utilice los archivos `tbl0.tsv`, `tbl1.tsv` y `tbl2.tsv`, para resolver las preg
 """
 import pandas as pd
 import numpy as np
-pd.set_option("display.notebook_repr_html", False)
+pd.set_option("display.notebook_repr_html", True)
 tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
 tbl1 = pd.read_csv("tbl1.tsv", sep="\t")
 tbl2 = pd.read_csv("tbl2.tsv", sep="\t")
@@ -18,8 +18,6 @@ def pregunta_01():
     Rta/
     40
     """
-    import pandas as pd
-    import numpy as np
     tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
     return len(tbl0.index)
 
@@ -29,8 +27,6 @@ def pregunta_02():
     Rta/
     4
     """
-    import pandas as pd
-    import numpy as np
     tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
     return len(tbl0.columns)
 
@@ -46,8 +42,6 @@ def pregunta_03():
     E    14
     Name: _c1, dtype: int64
     """
-    import pandas as pd
-    import numpy as np
     tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
     return tbl0["_c1"].groupby(tbl0["_c1"]).size()
 
@@ -62,8 +56,6 @@ def pregunta_04():
     E    4.785714
     Name: _c2, dtype: float64
     """
-    import pandas as pd
-    import numpy as np
     tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
     return tbl0[["_c1","_c2"]].groupby(by=["_c1"]).mean().squeeze()
 
@@ -80,8 +72,6 @@ def pregunta_05():
     E    9
     Name: _c2, dtype: int64
     """
-    import pandas as pd
-    import numpy as np
     tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
     return tbl0[["_c1","_c2"]].groupby(by=["_c1"]).max().squeeze()
 
@@ -92,8 +82,6 @@ def pregunta_06():
     Rta/
     ['A', 'B', 'C', 'D', 'E', 'F', 'G']
     """
-    import pandas as pd
-    import numpy as np
     tbl1 = pd.read_csv("tbl1.tsv", sep="\t")
     lst = []
     for item in tbl1["_c4"]:
@@ -115,8 +103,6 @@ def pregunta_07():
     E    67
     Name: _c2, dtype: int64
     """
-    import pandas as pd
-    import numpy as np
     tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
     return tbl0[["_c1","_c2"]].groupby(by=["_c1"]).sum().squeeze()
 
@@ -133,8 +119,6 @@ def pregunta_08():
     38   38   E    1  1999-09-28    39
     39   39   E    5  1998-01-26    44
     """
-    import pandas as pd
-    import numpy as np
     tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
     tbl0["suma"] = tbl0["_c0"] + tbl0["_c2"]
 
@@ -153,8 +137,6 @@ def pregunta_09():
     38   38   E    1  1999-09-28  1999
     39   39   E    5  1998-01-26  1998
     """
-    import pandas as pd
-    import numpy as np
     tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
     tbl0['year'] = tbl0['_c3'].str.slice(0, 4)
     
@@ -173,8 +155,6 @@ def pregunta_10():
     3   D                  1:2:3:5:5:7
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
-    import pandas as pd
-    import numpy as np
     tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
     dataf = pd.DataFrame()
     for letra in tbl0["_c1"].unique():
@@ -203,8 +183,6 @@ def pregunta_11():
     38   38      d,e
     39   39    a,d,f
     """
-    import pandas as pd
-    import numpy as np
     tbl1 = pd.read_csv("tbl1.tsv", sep="\t")
     dataf = pd.DataFrame()
     for letra in tbl1["_c0"].unique():
@@ -233,8 +211,6 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
-    import pandas as pd
-    import numpy as np
     tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
     tbl1 = pd.read_csv("tbl1.tsv", sep="\t")
     tbl2 = pd.read_csv("tbl2.tsv", sep="\t")
@@ -275,8 +251,6 @@ def pregunta_13():
     E    275
     Name: _c5b, dtype: int64
     """
-    import pandas as pd
-    import numpy as np
     tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
     tbl2 = pd.read_csv("tbl2.tsv", sep="\t")
     return tbl0.merge(tbl2, right_on = '_c0', left_on = '_c0').groupby('_c1').sum()['_c5b']
