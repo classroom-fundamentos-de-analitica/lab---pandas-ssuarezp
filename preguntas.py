@@ -1,12 +1,14 @@
 """
 Laboratorio - Manipulación de Datos usando Pandas
 -----------------------------------------------------------------------------------------
+
 Este archivo contiene las preguntas que se van a realizar en el laboratorio.
+
 Utilice los archivos `tbl0.tsv`, `tbl1.tsv` y `tbl2.tsv`, para resolver las preguntas.
 """
 import pandas as pd
 import numpy as np
-pd.set_option("display.notebook_repr_html", True)
+
 tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
 tbl1 = pd.read_csv("tbl1.tsv", sep="\t")
 tbl2 = pd.read_csv("tbl2.tsv", sep="\t")
@@ -18,8 +20,7 @@ def pregunta_01():
     Rta/
     40
     """
-    tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
-    return len(tbl0.index)
+    return len(tbl0)
 
 def pregunta_02():
     """
@@ -27,7 +28,6 @@ def pregunta_02():
     Rta/
     4
     """
-    tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
     return len(tbl0.columns)
 
 def pregunta_03():
@@ -42,8 +42,7 @@ def pregunta_03():
     E    14
     Name: _c1, dtype: int64
     """
-    tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
-    return tbl0["_c1"].groupby(tbl0["_c1"]).size()
+    return tbl0['_c1'].groupby(tbl0['_c1']).size()
 
 def pregunta_04():
     """
@@ -56,7 +55,6 @@ def pregunta_04():
     E    4.785714
     Name: _c2, dtype: float64
     """
-    tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
     return tbl0[["_c1","_c2"]].groupby(by=["_c1"]).mean().squeeze()
 
 def pregunta_05():
@@ -72,8 +70,7 @@ def pregunta_05():
     E    9
     Name: _c2, dtype: int64
     """
-    tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
-    return tbl0[["_c1","_c2"]].groupby(by=["_c1"]).max().squeeze()
+    return tbl0[['_c1','_c2']].groupby(['_c1']).max().squeeze()
 
 def pregunta_06():
     """
@@ -82,14 +79,11 @@ def pregunta_06():
     Rta/
     ['A', 'B', 'C', 'D', 'E', 'F', 'G']
     """
-    tbl1 = pd.read_csv("tbl1.tsv", sep="\t")
-    lst = []
-    for item in tbl1["_c4"]:
-        if item.upper() not in lst:
-            lst.append(item.upper())
-    lst.sort()
-    
-    return lst
+    lista=[]
+    for i in tbl1['_c4'].unique():
+        lista.append(i.upper())
+    lista.sort()    
+    return lista
 
 def pregunta_07():
     """
@@ -103,8 +97,7 @@ def pregunta_07():
     E    67
     Name: _c2, dtype: int64
     """
-    tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
-    return tbl0[["_c1","_c2"]].groupby(by=["_c1"]).sum().squeeze()
+    return tbl0[['_c1','_c2']].groupby(['_c1']).sum().squeeze()
 
 def pregunta_08():
     """
@@ -119,9 +112,7 @@ def pregunta_08():
     38   38   E    1  1999-09-28    39
     39   39   E    5  1998-01-26    44
     """
-    tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
-    tbl0["suma"] = tbl0["_c0"] + tbl0["_c2"]
-
+    tbl0['suma'] = tbl0['_c0'] + tbl0['_c2']
     return tbl0
 
 def pregunta_09():
@@ -137,9 +128,7 @@ def pregunta_09():
     38   38   E    1  1999-09-28  1999
     39   39   E    5  1998-01-26  1998
     """
-    tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
-    tbl0['year'] = tbl0['_c3'].str.slice(0, 4)
-    
+    tbl0['year']=tbl0['_c3'].str.slice(0,4)
     return tbl0
 
 def pregunta_10():
@@ -157,14 +146,14 @@ def pregunta_10():
     """
     tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
     dataf = pd.DataFrame()
-    for letra in tbl0["_c1"].unique():
-        df = np.where(tbl0["_c1"]==letra,tbl0["_c2"],"")
+    for i in tbl0["_c1"].unique():
+        df = np.where(tbl0["_c1"]==i,tbl0["_c2"],"")
         df = np.delete(df, np.where(df == ""))
         string = ""
         for item in list(np.sort(df, axis=0)):
             string = string + str(item) + ":"
         string = string[:-1]
-        temp = pd.DataFrame({"_c1":[letra], "_c2": string})
+        temp = pd.DataFrame({"_c1":[i], "_c2": string})
         dataf = dataf.append(temp, ignore_index=True)
     return dataf.sort_values("_c1").set_index("_c1")
 
@@ -183,18 +172,16 @@ def pregunta_11():
     38   38      d,e
     39   39    a,d,f
     """
-    tbl1 = pd.read_csv("tbl1.tsv", sep="\t")
     dataf = pd.DataFrame()
-    for letra in tbl1["_c0"].unique():
-        df = np.where(tbl1["_c0"]==letra,tbl1["_c4"],"")
+    for i in tbl1["_c0"].unique():
+        df = np.where(tbl1["_c0"]==i,tbl1["_c4"],"")
         df = np.delete(df, np.where(df == ""))
         string = ""
         for item in list(np.sort(df, axis=0)):
             string = string + str(item) + ","
         string = string[:-1]
-        temp = pd.DataFrame({"_c0":[letra], "_c4": string})
+        temp = pd.DataFrame({"_c0":[i], "_c4": string})
         dataf = dataf.append(temp, ignore_index=True)
-
     return dataf
 
 def pregunta_12():
@@ -211,9 +198,6 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
-    tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
-    tbl1 = pd.read_csv("tbl1.tsv", sep="\t")
-    tbl2 = pd.read_csv("tbl2.tsv", sep="\t")
     diccionario = {}
     for i in range (len(tbl2)):
         if tbl2.loc[i]["_c0"] in diccionario:
@@ -251,6 +235,4 @@ def pregunta_13():
     E    275
     Name: _c5b, dtype: int64
     """
-    tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
-    tbl2 = pd.read_csv("tbl2.tsv", sep="\t")
     return tbl0.merge(tbl2, right_on = '_c0', left_on = '_c0').groupby('_c1').sum()['_c5b']
