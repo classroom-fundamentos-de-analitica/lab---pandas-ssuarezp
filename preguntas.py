@@ -2,7 +2,7 @@
 Laboratorio - Manipulación de Datos usando Pandas
 -----------------------------------------------------------------------------------------
 
-Este archivo contiene las preguntas que se van a realizar en el laboratorio.
+Este archivo contiene llas preguntas que se van a realizar en el laboratorio.
 
 Utilice los archivos `tbl0.tsv`, `tbl1.tsv` y `tbl2.tsv`, para resolver las preguntas.
 """
