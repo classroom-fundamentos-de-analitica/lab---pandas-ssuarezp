@@ -143,18 +143,11 @@ def pregunta_10():
     3   D                  1:2:3:5:5:7
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
-    tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
-    dataf = pd.DataFrame()
-    for i in tbl0["_c1"].unique():
-        df = np.where(tbl0["_c1"]==i,tbl0["_c2"],"")
-        df = np.delete(df, np.where(df == ""))
-        string = ""
-        for item in list(np.sort(df, axis=0)):
-            string = string + str(item) + ":"
-        string = string[:-1]
-        temp = pd.DataFrame({"_c1":[i], "_c2": string})
-        dataf = dataf.append(temp, ignore_index=True)
-    return dataf.sort_values("_c1").set_index("_c1")
+    a = tbl0
+    b = a.groupby('_c1').agg({'_c2': lambda x: sorted(list(x))})
+    for index, row in b.iterrows():
+        row['_c2'] = ":".join([str(int) for int in row['_c2']])
+    return b
 
 def pregunta_11():
     """
