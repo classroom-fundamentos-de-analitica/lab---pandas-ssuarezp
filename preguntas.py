@@ -171,17 +171,8 @@ def pregunta_11():
     38   38      d,e
     39   39    a,d,f
     """
-    dataf = pd.DataFrame()
-    for i in tbl1["_c0"].unique():
-        df = np.where(tbl1["_c0"]==i,tbl1["_c4"],"")
-        df = np.delete(df, np.where(df == ""))
-        string = ""
-        for item in list(np.sort(df, axis=0)):
-            string = string + str(item) + ","
-        string = string[:-1]
-        temp = pd.DataFrame({"_c0":[i], "_c4": string})
-        dataf = dataf.append(temp, ignore_index=True)
-    return dataf
+ 
+    return tbl1.groupby("_c0")["_c4"].apply(lambda x: ",".join(sorted(x.astype(str)))).reset_index()
 
 def pregunta_12():
     """
